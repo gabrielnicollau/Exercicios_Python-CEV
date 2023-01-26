@@ -1,43 +1,40 @@
-"""
-Exercício Python 071: Crie um programa que simule o funcionamento de um caixa eletrônico. No início, pergunte ao usuário
-qual será o valor a ser sacado (número inteiro) e o programa vai informar quantas cédulas de cada valor serão entregues.
+"""Exercício Python 071: Crie um programa que simule o funcionamento de um caixa eletrônico. No início, pergunte ao
+usuário qual será o valor a ser sacado (número inteiro) e o programa vai informar quantas cédulas de cada valor serão
+entregues. OBS: considere que o caixa possui cédulas de R$50, R$20, R$10 e R$1."""
 
-OBS: considere que o caixa possui cédulas de R$50, R$20, R$10 e R$1.
-"""
+# Crie uma variável chamada "saque" que receba como parâmetro o valor a ser sacado.
 
-# Importante programa não deve se preocupar com a quantidade de notas existentes na máquina.
+# Valor a ser sacado
+valor = int(input('Valor de saque: R$'))
 
-# Cédulas disponíveis de R$50, R$20, R$10 e R$1.
+total = valor  # dinheiro
+cedula = 50  # Valor da primeira cédula.
+quantCedula = 0
+# Loop para subtrair o total de acordo o valor da cédula.
 
-print('=' * 40)
-print('{: ^40}'.format(' BANCO GNS '))
-print('=' * 40)
+while True:  # Enquanto o total a ser sacado for maior ou igual o valor da célula, tirar 50 do total e contar 1 para cada subtração.
+    if total >= cedula:
+        total -= cedula
+        quantCedula += 1
 
-# As notas disponíveis serão as de 1, 5, 10, 50 e 100 reais
+    else:  # Quando o total tiver o mesmo valor da cédula, no caso 50, mudar o valor dela.
+        if quantCedula > 0:  # Verificar a quantidade de cédulas e imprimir para cédula se for possivel fazer a subtração.
+            print(f'Você sacou {quantCedula} cédulas de {cedula} reais.')
 
-"""
-O primeiro passo é tentar empurrar o maior número de notas de 100 reais possível. Como fazemos isso?
-Dividindo o valor que o usuário pediu pra sacar por 100.
-"""
+# Se não for verdadeira a primeira condição.
+# Essa condição só vai ser aceita quando o total virar Falso, no caso, tanto o valor do total quanto da cédula serem o mesmo.
+        if cedula == 50:  # Se cédula for igual a 50.
+            cedula = 20  # Mudar o valor dela
 
-numero = int(input('Valor para sacar [10-600]: '))
+        elif cedula == 20:
+            cedula = 10
 
-cem = int(numero / 100)
-numero = numero % 100
+        elif cedula == 10:
+            cedula = 1
 
-cinquenta = int(numero / 50)
-numero = numero % 50
+        quantCedula = 0
 
-dez = int(numero / 10)
-numero = numero % 10
-
-cinco = int(numero / 5)
-numero = numero % 5
-
-um = numero
-
-print('Notas R$100,00 = ', cem)
-print('Notas R$ 50,00 = ', cinquenta)
-print('Notas R$ 10,00 = ', dez)
-print('Notas R$  5,00 = ', cinco)
-print('Notas R$  1,00 = ', um)
+        if total == 0:
+            break
+print()
+print('OPERAÇÃO ENCERRADA!')
